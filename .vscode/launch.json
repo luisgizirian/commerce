@@ -1,0 +1,62 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "compounds": [
+      {
+        "name": "All Container Apps",
+        "configurations": ["httpapi", "webclient"],
+        "presentation": {
+          "hidden": false,
+          "group": "Containers",
+          "order": 1
+        }
+      }
+    ],
+    "configurations": [
+      {
+        "name": "httpapi",
+        "type": "coreclr",
+        "request": "launch",
+        "preLaunchTask": "daprd-debug-api",
+        "postDebugTask": "daprd-down-api",
+        "program": "${workspaceFolder}/src/http-api/bin/Debug/net6.0/WebApi.dll",
+        "args": [],
+        "cwd": "${workspaceFolder}",
+        "stopAtEntry": false,
+        "env": {
+          "DOTNET_ENVIRONMENT": "Development",
+          "DOTNET_URLS": "http://localhost:5001",
+          "DAPR_HTTP_PORT": "3501",
+          "DAPR_GRPC_PORT": "50001",
+          "DAPR_METRICS_PORT": "9091"
+        }
+      },
+
+      {
+        "name": "webclient",
+        "type": "coreclr",
+        "request": "launch",
+        "preLaunchTask": "daprd-debug-web",
+        "postDebugTask": "daprd-down-web",
+        "program": "${workspaceFolder}/src/web-client/bin/Debug/net6.0/WebClient.dll",
+        "args": [],
+        "cwd": "${workspaceFolder}",
+        "stopAtEntry": false,
+        "env": {
+          "DOTNET_ENVIRONMENT": "Development",
+          "DOTNET_URLS": "http://localhost:5002",
+          "DAPR_HTTP_PORT": "3502",
+          "DAPR_GRPC_PORT": "50002",
+          "DAPR_METRICS_PORT": "9092",
+          "WEB_API_NAME": "api"
+        },
+        "protocol": "inspector",
+        "serverReadyAction": {
+          "action": "openExternally"
+        }
+      },
+  
+    ]
+  }
