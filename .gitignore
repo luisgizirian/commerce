@@ -1,0 +1,7 @@
+# nodejs folders
+node_modules/
+dist/
+
+# dotnet folders
+bin/
+obj/

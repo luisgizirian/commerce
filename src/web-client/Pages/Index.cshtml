@@ -1,0 +1,17 @@
+﻿@page
+@using Common
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome to Cmmrc</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">an Open Source business management software</a>.</p>
+
+    <span>[test data]</span>
+    @foreach (var forecast in (IEnumerable<WeatherForecast>)ViewData["Customers"]!)
+    {
+        <p>The forecast for @forecast.Date is @forecast.Summary!</p>
+    }
+</div>
