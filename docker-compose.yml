@@ -2,6 +2,9 @@ version: '3.4'
 
 services:
 
+  seq:
+    image: datalust/seq:latest
+
   redis:
     image: redis:alpine
 

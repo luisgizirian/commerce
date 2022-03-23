@@ -1,6 +1,8 @@
+var appName = "Web Client";
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.AddCustomSerilog();
 builder.Services.AddDaprClient();
 builder.Services.AddRazorPages();
 builder.Services.AddScoped<ICmmrcApi, CmmrcApi>();
@@ -27,4 +29,16 @@ app.UseAuthorization();
 
 app.MapRazorPages();
 
-app.Run();
+try
+{
+    app.Logger.LogInformation("Starting web host ({ApplicationName})...", appName);
+    app.Run();
+}
+catch (Exception ex)
+{
+    app.Logger.LogCritical(ex, "Host terminated unexpectedly ({ApplicationName})...", appName);
+}
+finally
+{
+    Serilog.Log.CloseAndFlush();
+}

@@ -2,6 +2,9 @@ version: '3.4'
 
 services:
 
+  seq:
+    image: datalust/seq:latest
+
   gateway:
     image: ${REGISTRY:-cmmrc}/gateway:${TAG:-latest}
     build:

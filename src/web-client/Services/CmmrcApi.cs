@@ -25,6 +25,7 @@ public class CmmrcApi : ICmmrcApi
 
     public async Task<IEnumerable<WeatherForecast>> GetCustomers()
     {
+        _logger.LogWarning("Invoking API and Log Sink testing.");
         return await _daprClient.InvokeMethodAsync<IEnumerable<WeatherForecast>>(
             HttpMethod.Get,
             _configuration["API_APP_ID"],
