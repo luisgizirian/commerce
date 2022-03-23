@@ -1,0 +1,15 @@
+version: '3.4'
+
+services:
+
+  gateway:
+    image: ${REGISTRY:-cmmrc}/gateway:${TAG:-latest}
+    build:
+      context: .
+      dockerfile: src/gateway/Dockerfile
+
+  gateway-dapr:
+    image: "daprio/daprd:latest"
+    network_mode: "service:gateway"
+    depends_on:
+      - gateway
