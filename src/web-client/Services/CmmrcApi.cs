@@ -27,7 +27,7 @@ public class CmmrcApi : ICmmrcApi
     {
         return await _daprClient.InvokeMethodAsync<IEnumerable<WeatherForecast>>(
             HttpMethod.Get,
-            _configuration["WEB_API_NAME"],
+            _configuration["API_APP_ID"],
             "weatherforecast");
     }
 }

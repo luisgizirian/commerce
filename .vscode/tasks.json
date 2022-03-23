@@ -23,6 +23,8 @@
         "grpcPort": 50001,
         "metricsPort": 9091,
         "type": "daprd",
+        "componentsPath": "./dapr/components-debug",
+        "config": "./dapr/configuration-debug/cmmrc-config.yaml",
         "dependsOn": ["build-api"]
       },
       {
@@ -51,6 +53,8 @@
         "grpcPort": 50002,
         "metricsPort": 9092,
         "type": "daprd",
+        "componentsPath": "./dapr/components-debug",
+        "config": "./dapr/configuration-debug/cmmrc-config.yaml",
         "dependsOn": ["build-web"]
       },
       {

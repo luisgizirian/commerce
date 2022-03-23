@@ -1,0 +1,31 @@
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: pubsub
+  namespace: cmmrc
+spec:
+# Temporarily use Redis for pub/sub not to overload single host cases. We'll try some reusability.
+  type: pubsub.redis
+#  type: pubsub.rabbitmq
+  version: v1
+  metadata:
+  #- name: host
+  #  value: "amqp://rabbitmq:5672"
+  #- name: durable
+  #  value: "false"
+  #- name: deletedWhenUnused
+  #  value: "false"
+  #- name: autoAck
+  #  value: "false"
+  #- name: reconnectWait
+  #  value: "0"
+  #- name: concurrency
+  #  value: parallel
+  - name: redisHost
+    value: localhost:6379
+  - name: redisPassword
+    secretKeyRef:
+      name: State.RedisPassword
+      key: State.RedisPassword
+auth:
+  secretStore: cmmrc-secretstore

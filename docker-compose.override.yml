@@ -1,0 +1,92 @@
+version: '3.4'
+
+services:
+
+  redis:
+    ports:
+      - "5379:6379"
+  
+  zipkin:
+    ports:
+      - "5411:9411"
+
+  api:
+    ports:
+      - '50001:50001'
+    environment:
+      DOTNET_ENVIRONMENT: 'Development'
+      ASPNETCORE_URLS: 'http://+:5001'
+      DAPR_HTTP_PORT: 3501
+      DAPR_GRPC_PORT: 50001
+      DAPR_METRICS_PORT: 9091
+
+  api-dapr:
+    command:
+      [
+        './daprd',
+        '-app-id',
+        'api',
+        '-app-port',
+        '5001',
+        '-dapr-http-port',
+        '3501',
+        '-placement-host-address',
+        'placement:50010',
+        "-components-path", "/components",
+        "-config", "/configuration/cmmrc-config.yaml"
+      ]
+    volumes:
+      - "./dapr/components/:/components"
+      - "./dapr/configuration/:/configuration"
+
+  web:
+    ports:
+      - '5002:5002'
+      - '50002:50002'
+    environment:
+      DOTNET_ENVIRONMENT: 'Development'
+      ASPNETCORE_URLS: 'http://+:5002'
+      DAPR_HTTP_PORT: 3502
+      DAPR_GRPC_PORT: 50002
+      DAPR_METRICS_PORT: 9092
+      API_APP_ID: 'api'
+
+  web-dapr:
+    command: [
+        './daprd',
+        '-app-id',
+        'web',
+        '-app-port',
+        '5002',
+        '-dapr-http-port',
+        '3502',
+        '-placement-host-address',
+        'placement:50010',
+      ]
+  
+  gateway:
+    environment:
+      - ENVOY_CATALOG_API_ADDRESS=catalog-api
+      - ENVOY_CATALOG_API_PORT=80
+      - ENVOY_ORDERING_API_ADDRESS=ordering-api
+      - ENVOY_ORDERING_API_PORT=80
+    ports:
+      - "5202:80"
+      - "15202:8001"
+      - "50008:50001"
+  
+  gateway-dapr:
+    command: ["./daprd",
+      "-app-id", "gateway",
+      "-app-port", "80",
+      "-components-path", "/components",
+      "-config", "/configuration/cmmrc-config.yaml"
+      ]
+    volumes:
+      - "./dapr/components/:/components"
+      - "./dapr/configuration/:/configuration"
+  
+  dapr-placement:
+    command: ["./placement", "-port", "50000", "-log-level", "debug"]
+    ports:
+      - "50000:50000"

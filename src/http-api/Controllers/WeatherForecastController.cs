@@ -1,3 +1,4 @@
+using Dapr.Client;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Models;
 
@@ -12,22 +13,37 @@ public class WeatherForecastController : ControllerBase
         "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
     };
 
+    private readonly DaprClient _daprClient;
     private readonly ILogger<WeatherForecastController> _logger;
 
-    public WeatherForecastController(ILogger<WeatherForecastController> logger)
+    public WeatherForecastController(
+        DaprClient daprClient,
+        ILogger<WeatherForecastController> logger)
     {
+        _daprClient = daprClient;
         _logger = logger;
     }
 
     [HttpGet(Name = "GetWeatherForecast")]
-    public IEnumerable<WeatherForecast> Get()
+    public async Task<IEnumerable<WeatherForecast>> Get()
     {
-        return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+        var result =  Enumerable.Range(1, 5).Select(index => new WeatherForecast
         {
             Date = DateTime.Now.AddDays(index),
             TemperatureC = Random.Shared.Next(-20, 55),
             Summary = Summaries[Random.Shared.Next(Summaries.Length)]
         })
-        .ToArray();
+        .ToList();
+
+        var stored = await _daprClient.GetStateAsync<string>("cmmrc-statestore", "pa");
+
+        if (stored == null) {
+            stored = "_default_";
+            await _daprClient.SaveStateAsync<string>("cmmrc-statestore", "pa", stored);
+        }
+
+        result.Add(new WeatherForecast { Date = DateTime.UtcNow, TemperatureC = 0, Summary = stored});
+
+        return result.ToArray();
     }
 }

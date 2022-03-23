@@ -1,60 +1,39 @@
 version: '3.4'
 
 services:
+
+  redis:
+    image: redis:alpine
+
+  zipkin:
+    image: openzipkin/zipkin-slim
+
   api:
-    image: ${REGISTRY:-api}:${TAG:-latest}
+    image: ${REGISTRY:-cmmrc}/api:${TAG:-latest}
     build:
       context: ./src
       dockerfile: http-api/Dockerfile
-    ports:
-      - '50001:50001'
-    environment:
-      DOTNET_ENVIRONMENT: 'Development'
-      ASPNETCORE_URLS: 'http://+:5001'
-      DAPR_HTTP_PORT: 3501
-      DAPR_GRPC_PORT: 50001
-      DAPR_METRICS_PORT: 9091
+    depends_on:
+      - redis
 
   api-dapr:
     image: 'daprio/daprd:latest'
-    command:
-      [
-        './daprd',
-        '-app-id',
-        'dotnet-app',
-        '-app-port',
-        '5001',
-        '-dapr-http-port',
-        '3501',
-        '-placement-host-address',
-        'placement:50010',
-      ]
     network_mode: 'service:api'
     depends_on:
       - api
 
   web:
-    image: ${REGISTRY:-web}:${TAG:-latest}
-    ports:
-      - '5002:5002'
-      - '50002:50002'
+    image: ${REGISTRY:-cmmrc}/web:${TAG:-latest}
     build:
       context: ./src
       dockerfile: web-client/Dockerfile
-    environment:
-      DOTNET_ENVIRONMENT: 'Development'
-      ASPNETCORE_URLS: 'http://+:5002'
-      DAPR_HTTP_PORT: 3502
-      DAPR_GRPC_PORT: 50002
-      DAPR_METRICS_PORT: 9092
-      WEB_API_NAME: 'dotnet-app'
 
   web-dapr:
     image: 'daprio/daprd:latest'
     command: [
         './daprd',
         '-app-id',
-        'node-app',
+        'web',
         '-app-port',
         '5002',
         '-dapr-http-port',
@@ -65,9 +44,21 @@ services:
     network_mode: 'service:web'
     depends_on:
       - web
+  
+  gateway:
+    image: ${REGISTRY:-cmmrc}/gateway:${TAG:-latest}
+    build:
+      context: .
+      dockerfile: src/gateway/Dockerfile
+
+  gateway-dapr:
+    image: "daprio/daprd:latest"
+    network_mode: "service:gateway"
+    depends_on:
+      - gateway
+  
+  # webstatus:
+  #   image: xabarilcoding/healthchecksui:5.0.0
 
   dapr-placement:
     image: 'daprio/dapr:latest'
-    command: ['./placement', '-port', '50010']
-    ports:
-      - '50010:50010'
