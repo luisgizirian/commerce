@@ -10,8 +10,9 @@
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">an Open Source business management software</a>.</p>
 
     <span>[test data]</span>
-    @foreach (var forecast in (IEnumerable<WeatherForecast>)ViewData["Customers"]!)
+    @foreach (var product in (IEnumerable<CatalogItem>)ViewData["Products"])
     {
-        <p>The forecast for @forecast.Date is @forecast.Summary (@forecast.TemperatureF)!</p>
+        @* <p>The forecast for @forecast.Date is @forecast.Summary (@forecast.TemperatureF)!</p> *@
+        <p>SKU @product.Sku - @product.ProductName</p>
     }
 </div>

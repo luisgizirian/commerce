@@ -7,6 +7,10 @@ services:
       - ACCEPT_EULA=Y
     ports:
       - "5340:80"
+  
+  mongo:
+    volumes:
+      - "./storage/mongodb/:/data/db"
 
   redis:
     ports:

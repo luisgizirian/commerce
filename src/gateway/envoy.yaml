@@ -43,7 +43,7 @@ static_resources:
                   prefix: "/h/"
                 route:
                   auto_host_rewrite: true
-                  prefix_rewrite: "/v1.0/invoke/http-api/method/"
+                  prefix_rewrite: "/v1.0/invoke/api/method/"
                   cluster: dapr
               - name: "h-long"
                 match:

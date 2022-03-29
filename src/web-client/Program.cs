@@ -5,6 +5,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.AddCustomSerilog();
 builder.Services.AddDaprClient();
 builder.Services.AddRazorPages();
+builder.Services.AddHttpClient("c", client => {
+    client.BaseAddress = new Uri("http://gateway");
+});
 builder.Services.AddScoped<ICmmrcApi, CmmrcApi>();
 
 ConfigurationManager configuration = builder.Configuration;

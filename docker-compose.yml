@@ -5,6 +5,9 @@ services:
   seq:
     image: datalust/seq:latest
 
+  mongo:
+    image: mongo:latest
+
   redis:
     image: redis:alpine
 

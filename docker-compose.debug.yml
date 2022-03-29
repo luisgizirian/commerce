@@ -4,6 +4,9 @@ services:
 
   seq:
     image: datalust/seq:latest
+  
+  mongo:
+    image: mongo:latest
 
   gateway:
     image: ${REGISTRY:-cmmrc}/gateway:${TAG:-latest}

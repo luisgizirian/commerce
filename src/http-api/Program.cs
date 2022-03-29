@@ -1,6 +1,14 @@
+using WebApi.Models;
+using WebApi.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.Configure<CatalogStoreDatabaseSettings>(
+    builder.Configuration.GetSection("CatalogStoreDatabase"));
+
+builder.Services.AddSingleton<ICatalogService, CatalogService>();
+
 builder.Services.AddDaprClient();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

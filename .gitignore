@@ -1,7 +1,11 @@
 # nodejs folders
-node_modules/
-dist/
+# node_modules/
+# dist/
 
 # dotnet folders
 bin/
 obj/
+
+/storage/mongodb/
+
+.DS_Store

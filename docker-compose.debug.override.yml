@@ -8,6 +8,10 @@ services:
     ports:
       - "5340:80"
 
+  mongo:
+    volumes:
+      - "./storage/mongodb/:/data/db"
+
   gateway:
     environment:
       - ENVOY_CATALOG_API_ADDRESS=catalog-api
