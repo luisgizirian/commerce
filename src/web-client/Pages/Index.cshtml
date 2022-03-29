@@ -12,7 +12,6 @@
     <span>[test data]</span>
     @foreach (var product in (IEnumerable<CatalogItem>)ViewData["Products"])
     {
-        @* <p>The forecast for @forecast.Date is @forecast.Summary (@forecast.TemperatureF)!</p> *@
         <p>SKU @product.Sku - @product.ProductName</p>
     }
 </div>

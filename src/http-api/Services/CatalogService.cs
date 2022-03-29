@@ -38,18 +38,6 @@ public class CatalogService : ICatalogService
     public async Task<List<CatalogItem>> GetAsync() =>
         await _catalogCollection.Find(ci => ci.IsEnabled == true).ToListAsync();
 
-    // public async Task<List<CatalogItem>> GetAsync() {
-        
-    //     var result = new List<CatalogItem>() {
-    //         new CatalogItem { Id = System.Guid.NewGuid().ToString(), Sku = "001", ProductName = "Alfalfa", IsInStock = true, IsEnabled = true},
-    //         new CatalogItem { Id = System.Guid.NewGuid().ToString(), Sku = "002", ProductName = "Albahaca", IsInStock = true, IsEnabled = true},
-    //     };
-
-    //     _logger.LogInformation($"Listing Catalog Products... {result.Count()}");
-
-    //     return await Task.FromResult(result);
-    // }
-
     public async Task<CatalogItem?> GetAsync(string id) =>
         await _catalogCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
 

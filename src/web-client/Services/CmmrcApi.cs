@@ -41,8 +41,6 @@ public class CmmrcApi : ICmmrcApi
         };
         var result = JsonSerializer.Deserialize<IEnumerable<CatalogItem>>(response, options);
 
-        _logger.LogInformation($"Listing Catalog Items... {result.Count()}");
-
         return result;
         
         // TEST: web - gw - api could be all Daprized. Check if there's any gain and measure.
