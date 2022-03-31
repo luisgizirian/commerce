@@ -6,9 +6,21 @@
 
 Managemnt Software for running your daily business operations. Extensible and easy to integrate.
 
-> Please check the [Discussions](https://github.com/luisgizirian/commerce/discussions) area, and join us in there. It's a great way to participate!
+[high-level-description-here]
 
-### Mongo DB manual DB initialization (until automated comes...)
+## Contributing
+---
+Post bug reports, feature requests, and questions in [Issues](https://github.com/luisgizirian/commerce/issues).
+
+> Please check the [Discussions](https://github.com/luisgizirian/commerce/discussions) area, and join us in there. It's a great way to participate too!
+
+This project welcomes contributions and suggestions. PRs are welcome as well. Improving and translating documentation is encouraged.
+
+As you can tell, there  are many ways to participate in the project, and help on elevating its quality.
+
+
+---
+### [still-editing] Mongo DB manual DB initialization (until automated comes...)
 
 1. Run the App (it'll create DB + Collection in MongoDB Container). No results rendered.
 2. Head your browser to http://localhost:5002
