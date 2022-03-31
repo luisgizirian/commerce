@@ -60,6 +60,7 @@ services:
       DAPR_GRPC_PORT: 50002
       DAPR_METRICS_PORT: 9092
       API_APP_ID: 'api'
+      GATEWAY_ADDR: 'http://gateway'
 
   web-dapr:
     command: [

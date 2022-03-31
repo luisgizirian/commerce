@@ -1,17 +1,17 @@
 var appName = "Web Client";
 var builder = WebApplication.CreateBuilder(args);
 
+ConfigurationManager configuration = builder.Configuration;
+IWebHostEnvironment environment = builder.Environment;
+
 // Add services to the container.
 builder.AddCustomSerilog();
 builder.Services.AddDaprClient();
 builder.Services.AddRazorPages();
 builder.Services.AddHttpClient("c", client => {
-    client.BaseAddress = new Uri("http://gateway");
+    client.BaseAddress = new Uri(configuration["GATEWAY_ADDR"]);
 });
 builder.Services.AddScoped<ICmmrcApi, CmmrcApi>();
-
-ConfigurationManager configuration = builder.Configuration;
-IWebHostEnvironment environment = builder.Environment;
 
 var app = builder.Build();
 

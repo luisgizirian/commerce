@@ -42,13 +42,5 @@ public class CmmrcApi : ICmmrcApi
         var result = JsonSerializer.Deserialize<IEnumerable<CatalogItem>>(response, options);
 
         return result;
-        
-        // TEST: web - gw - api could be all Daprized. Check if there's any gain and measure.
-        //       By now we'll leave it HTTP - HTTP - GRPC.
-        //
-        // return await _daprClient.InvokeMethodAsync<IEnumerable<CatalogItem>>(
-        //     HttpMethod.Get,
-        //     _configuration["API_APP_ID"],
-        //     "/c/catalog/list");
     }
 }
