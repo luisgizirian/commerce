@@ -18,7 +18,7 @@ public class CatalogController : ControllerBase
         _logger = logger;
     }
 
-    [HttpGet("list")]
+    [HttpGet]
     public async Task<List<CatalogItem>> Get() =>
         await _catalogService.GetAsync();
 

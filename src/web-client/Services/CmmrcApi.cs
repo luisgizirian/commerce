@@ -33,7 +33,7 @@ public class CmmrcApi : ICmmrcApi
 
     public async Task<IEnumerable<CatalogItem>> ListCatalogItems()
     {
-        var response = await Client.GetStringAsync("/h/catalog/list");
+        var response = await Client.GetStringAsync("/h/catalog");
 
         var options = new JsonSerializerOptions
         {
