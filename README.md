@@ -8,7 +8,7 @@
 
 To keep growing your business, having organized and available information is key. What you sell and its availability, your customers, their interactions through time, how operations affect your bottom line, it is all crucial data you want at your fingertips to decide what to do next. 
 
-You will find here a Software piece that takes care of these things. You can also participate (and are encouraged to do so!) in its building, by involving in key areas as: development, documentation, testing, overseeing (or letting us know about things), engaging into conversations; becoming a piece of the community. You can give as little or as much time you want, as long as you put your thought to it. Even if it's reporting a bug!
+You will find here a Software piece that takes care of these things. You can also participate (and are encouraged to do so!) in building it by involving in key areas as: development, documentation, testing, overseeing (or letting us know about things), engaging into conversations; becoming a piece of the community. You can give as little or as much time you want, as long as you put your thought to it. Even if it's reporting a bug!
 
 [high-level-description-here]
 
