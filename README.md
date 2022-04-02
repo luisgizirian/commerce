@@ -9,7 +9,7 @@ Managemnt Software for running your daily business operations. Extensible and ea
 [high-level-description-here]
 
 ## Contributing
----
+
 Post bug reports, feature requests, and questions in [Issues](https://github.com/luisgizirian/commerce/issues).
 
 > Please check the [Discussions](https://github.com/luisgizirian/commerce/discussions) area, and join us in there. It's a great way to participate too!
