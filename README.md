@@ -4,7 +4,11 @@
 
 **Please note!** The experiments in this repository should be considered to be in beta. Significant portions of these experiments are subject to change without warning (although accesible through repo's history). **No part of this code should be considered stable.**
 
-Business Management Software for running your daily business operations. Extensible and easy to integrate.
+### Business Management Software for running your daily operations. Easy to deploy and integrate!
+
+To keep growing your business, having organized and available information is crucial. What you sell and its availability, your customers, their interactions through time, how operations affect your bottom line, it is all crucial data you want at your fingertips to decide wht to do next. 
+
+You will find here a Software piece that takes care of these things. You can also participate (and are encouraged to do so!) in its building, by involving in key areas as: development, documentation, testing, overseeing (or letting us know about things), engaging into conversations; becoming a piece of the community. You can give as little or as much time you want, as long as you put your thought to it. Even if it's reporting a bug!
 
 [high-level-description-here]
 
