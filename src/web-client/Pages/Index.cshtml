@@ -12,6 +12,6 @@
     <span>[test data]</span>
     @foreach (var product in (IEnumerable<CatalogItem>)ViewData["Products"])
     {
-        <p>SKU @product.Sku - @product.ProductName</p>
+        <p>SKU @product.Sku - @product.Name</p>
     }
 </div>
