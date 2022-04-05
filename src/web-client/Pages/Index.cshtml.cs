@@ -18,6 +18,6 @@ public class IndexModel : PageModel
 
     public async Task OnGet()
     {
-        ViewData["Products"] = await _api.ListCatalogItems();
+        ViewData["Products"] = await _api.ListCatalogItems(true);
     }
 }

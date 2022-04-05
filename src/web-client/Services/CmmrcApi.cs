@@ -5,7 +5,7 @@ using System.Text.Json;
 
 public interface ICmmrcApi
 {
-    Task<IEnumerable<CatalogItem>> ListCatalogItems();
+    Task<IEnumerable<CatalogItem>> ListCatalogItems(bool includeDisabled = false);
 }
 
 public class CmmrcApi : ICmmrcApi
@@ -31,9 +31,9 @@ public class CmmrcApi : ICmmrcApi
 
     private HttpClient Client => _httpFactory.CreateClient("c");
 
-    public async Task<IEnumerable<CatalogItem>> ListCatalogItems()
+    public async Task<IEnumerable<CatalogItem>> ListCatalogItems(bool includeDisabled = false)
     {
-        var response = await Client.GetStringAsync("/h/catalog");
+        var response = await Client.GetStringAsync($"/h/catalog{(includeDisabled?"?includeDisabled=true":"")}");
 
         var options = new JsonSerializerOptions
         {

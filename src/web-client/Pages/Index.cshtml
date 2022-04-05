@@ -6,12 +6,29 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome to Cmmrc</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">an Open Source business management software</a>.</p>
-
-    <span>[test data]</span>
-    @foreach (var product in (IEnumerable<CatalogItem>)ViewData["Products"])
-    {
-        <p>SKU @product.Sku - @product.Name</p>
-    }
+    <h1 class="display-4">@DateTime.Now.DayOfWeek's outlook (@DateTime.Today.ToString("d"))</h1>
+    <p>Learn about <a href="https://github.com/luisgizirian/commerce">an Open Source business management software</a>.</p>
 </div>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">SKU</th>
+      <th scope="col">Name</th>
+    </tr>
+  </thead>
+  <tbody>
+  @{
+  int row = 0;
+  foreach (var product in (IEnumerable<CatalogItem>)ViewData["Products"])
+  {
+      <tr @(!product.IsEnabled?"class=table-danger":"")>
+        <th scope="row">@(++row)</th>
+        <td>@product.Sku</td>
+        <td>@product.Name</td>
+      </tr>
+  }
+  }
+  </tbody>
+</table>

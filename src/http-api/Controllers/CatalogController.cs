@@ -19,8 +19,8 @@ public class CatalogController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<List<CatalogItem>> Get() =>
-        await _catalogService.GetAsync();
+    public async Task<List<CatalogItem>> Get(bool includeDisabled = false) =>
+        await _catalogService.GetAsync(includeDisabled);
 
     [HttpGet("{id:length(24)}")]
     public async Task<ActionResult<CatalogItem>> Get(string id)
