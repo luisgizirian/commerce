@@ -8,7 +8,7 @@ IWebHostEnvironment environment = builder.Environment;
 builder.AddCustomSerilog();
 builder.Services.AddDaprClient();
 builder.Services.AddRazorPages();
-builder.Services.AddHttpClient("c", client => {
+builder.Services.AddHttpClient("apientry", client => {
     client.BaseAddress = new Uri(configuration["GATEWAY_ADDR"]);
 });
 builder.Services.AddScoped<ICmmrcApi, CmmrcApi>();

@@ -6,6 +6,7 @@ using System.Text.Json;
 public interface ICmmrcApi
 {
     Task<IEnumerable<CatalogItem>> ListCatalogItems(bool includeDisabled = false);
+    Task<CatalogItem> GetCatalogItem(string id);
 }
 
 public class CmmrcApi : ICmmrcApi
@@ -29,7 +30,7 @@ public class CmmrcApi : ICmmrcApi
         _logger = logger;
     }
 
-    private HttpClient Client => _httpFactory.CreateClient("c");
+    private HttpClient Client => _httpFactory.CreateClient("apientry");
 
     public async Task<IEnumerable<CatalogItem>> ListCatalogItems(bool includeDisabled = false)
     {
@@ -42,5 +43,18 @@ public class CmmrcApi : ICmmrcApi
         var result = JsonSerializer.Deserialize<IEnumerable<CatalogItem>>(response, options);
 
         return result;
+    }
+
+    public async Task<CatalogItem> GetCatalogItem(string id)
+    {
+        var response = await Client.GetStringAsync($"/h/catalog/{id}");
+
+        var options = new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true
+        };
+        var result = JsonSerializer.Deserialize<CatalogItem>(response, options);
+
+        return result;       
     }
 }
