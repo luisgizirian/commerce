@@ -46,3 +46,5 @@ As you can tell, there  are many ways to participate in the project, and help on
 
 Now, you can stop/remove/start docker-compose with `docker-compose down && docker-compose up --build` command. You'll notice that heading to http://localhost:5002 gets you 2 listed results. This is because MongoDB container is using a persisted volume outside its boundaries. NOTE: this will later become be the basis for local/manual backup.
 
+> Note: if you get a permissions error next time you docker-up related to folder mongodb, `cd` to `storage` and run these commands `sudo chmod ugo+rwx mongodb/* && sudo chmod ugo+rwx mongodb/diagnostic.data/* && sudo chmod ugo+rwx mongodb/journal/*`
+
