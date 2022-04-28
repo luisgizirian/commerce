@@ -1,3 +1,6 @@
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.AspNetCore.Authentication;
+
 var appName = "Web Client";
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +16,32 @@ builder.Services.AddHttpClient("apientry", client => {
 });
 builder.Services.AddScoped<ICmmrcApi, CmmrcApi>();
 
+JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
+
+builder.Services.AddAuthentication(options => {
+    options.DefaultScheme = "Cookies";
+    options.DefaultChallengeScheme = "oidc";
+})
+    .AddCookie("Cookies")
+    .AddOpenIdConnect("oidc", options => {
+        options.Authority = configuration["Authority"];
+
+        options.RequireHttpsMetadata = false;
+
+        options.ClientId = "interactive";
+        options.ClientSecret = "49C1A7E1-0C79-4A89-A3D6-A37998FB86B0";
+        options.ResponseType = "code";
+
+        options.Scope.Clear();
+        options.Scope.Add("openid");
+        options.Scope.Add("profile");
+        options.Scope.Add("verification");
+        options.ClaimActions.MapJsonKey("email_verified", "email_verified");
+        options.GetClaimsFromUserInfoEndpoint = true;
+
+        options.SaveTokens = true;
+    });
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -27,10 +56,11 @@ if (!app.Environment.IsDevelopment())
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapRazorPages();
+app.MapRazorPages()
+    .RequireAuthorization();
 
 try
 {
