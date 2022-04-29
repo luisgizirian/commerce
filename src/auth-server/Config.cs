@@ -43,7 +43,16 @@ public static class Config
                 PostLogoutRedirectUris = { "http://localhost:5002/signout-callback-oidc" },
 
                 AllowOfflineAccess = true,
-                AllowedScopes = { "openid", "profile", "catalog.api", "verification" }
+                AllowedScopes = {
+                    "openid",
+                    "profile",
+                    "catalog.api",
+                    "verification" },
+                
+                //https://stackoverflow.com/questions/48207770/identityserver4-custom-authenticationhandler-cant-find-all-claims-for-a-user?answertab=active#tab-top
+                // Allowed for User.IsInRole("[role]")
+                AlwaysSendClientClaims = true,
+                AlwaysIncludeUserClaimsInIdToken = true,
             },
         };
 }

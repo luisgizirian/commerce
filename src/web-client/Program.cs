@@ -1,5 +1,7 @@
 using System.IdentityModel.Tokens.Jwt;
+using IdentityModel;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.IdentityModel.Tokens;
 
 var appName = "Web Client";
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +13,7 @@ IWebHostEnvironment environment = builder.Environment;
 builder.AddCustomSerilog();
 builder.Services.AddDaprClient();
 builder.Services.AddRazorPages();
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddHttpClient("apientry", client => {
     client.BaseAddress = new Uri(configuration["GATEWAY_ADDR"]);
 });
@@ -35,10 +38,19 @@ builder.Services.AddAuthentication(options => {
         options.Scope.Clear();
         options.Scope.Add("openid");
         options.Scope.Add("profile");
+        options.Scope.Add("catalog.api");
         options.Scope.Add("verification");
-        options.ClaimActions.MapJsonKey("email_verified", "email_verified");
-        options.GetClaimsFromUserInfoEndpoint = true;
+        options.Scope.Add("offline_access");
+        options.ClaimActions.MapJsonKey("roles", "roles");
+        // options.ClaimActions.MapJsonKey("email_verified", "email_verified");
 
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            NameClaimType = JwtClaimTypes.Name,
+            RoleClaimType = JwtClaimTypes.Role
+        };
+        
+        options.GetClaimsFromUserInfoEndpoint = true;
         options.SaveTokens = true;
     });
 

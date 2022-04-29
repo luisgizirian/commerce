@@ -11,6 +11,18 @@ builder.Services.AddSingleton<ICatalogService, CatalogService>();
 
 builder.Services.AddDaprClient();
 builder.Services.AddControllers();
+
+builder.Services.AddAuthentication("Bearer")
+    .AddJwtBearer("Bearer", options => {
+        
+        options.RequireHttpsMetadata = false;
+
+        options.Authority = builder.Configuration["Authority"];
+        options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters {
+            ValidateAudience = false
+        };
+    });
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 //builder.Services.AddSwaggerGen();
@@ -25,7 +37,7 @@ if (app.Environment.IsDevelopment())
 }
 
 // app.UseHttpsRedirection();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
