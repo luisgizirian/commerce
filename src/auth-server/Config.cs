@@ -19,6 +19,11 @@ public static class Config
                     JwtClaimTypes.EmailVerified
                 }
             },
+            new IdentityResources.Email(),
+            new IdentityResource {
+                Name = "roles",
+                UserClaims = new List<string> {"role"}
+            },
         };
 
     public static IEnumerable<ApiScope> ApiScopes =>
