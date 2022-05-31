@@ -57,6 +57,19 @@ services:
       DOTNET_ENVIRONMENT: 'Development'
       ASPNETCORE_URLS: 'http://+:80'
   
+  react:
+    volumes:
+      - './:/app'
+      - '/app/node_modules'
+    ports:
+      - 3000:3000
+    stdin_open: true
+    environment:
+      API_APP_ID: 'api'
+      GATEWAY_ADDR: 'http://gateway'
+      Authority: 'http://${EXTERNAL_DNS_NAME_OR_IP}:5010/'
+    command: npm start
+  
   web:
     ports:
       - '5002:5002'
