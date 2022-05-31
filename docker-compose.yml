@@ -33,6 +33,11 @@ services:
    build:
     context: ./src
     dockerfile: auth-server/Dockerfile
+  
+  react:
+    image: ${REGISTRY:-cmmrc}/react:${TAG:-latest}
+    build:
+      context: ./src/react-client
 
   web:
     image: ${REGISTRY:-cmmrc}/web:${TAG:-latest}
