@@ -9,3 +9,4 @@ obj/
 /storage/mongodb/
 
 .DS_Store
+.env

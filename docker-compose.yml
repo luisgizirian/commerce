@@ -27,6 +27,12 @@ services:
     network_mode: 'service:api'
     depends_on:
       - api
+  
+  identity:
+   image: ${REGISTRY:-cmmrc}/identity:${TAG:-latest}
+   build:
+    context: ./src
+    dockerfile: auth-server/Dockerfile
 
   web:
     image: ${REGISTRY:-cmmrc}/web:${TAG:-latest}

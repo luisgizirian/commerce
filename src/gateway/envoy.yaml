@@ -31,13 +31,13 @@ static_resources:
                 allow_headers: "authorization, content-type, x-requestid, x-requested-with, x-signalr-user-agent"
                 allow_credentials: true
               routes:
-              - name: "pics"
-                match:
-                  prefix: "/c/pics/"
-                route:
-                  auto_host_rewrite: true
-                  prefix_rewrite: "/pics/"
-                  cluster: catalog
+              # - name: "is"
+              #   match:
+              #     prefix: "/identity/"
+              #   route:
+              #     auto_host_rewrite: true
+              #     prefix_rewrite: ""
+              #     cluster: auth
               - name: "h-short"
                 match:
                   prefix: "/h/"
@@ -140,3 +140,11 @@ static_resources:
     - socket_address:
         address: ${ENVOY_ORDERING_API_ADDRESS}
         port_value: 80
+  # - name: auth
+  #   connect_timeout: 0.25s
+  #   type: strict_dns
+  #   lb_policy: round_robin
+  #   hosts:
+  #   - socket_address:
+  #       address: 'identity'
+  #       port_value: '80'

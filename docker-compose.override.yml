@@ -29,6 +29,7 @@ services:
       DAPR_HTTP_PORT: 3501
       DAPR_GRPC_PORT: 50001
       DAPR_METRICS_PORT: 9091
+      Authority: 'http://${EXTERNAL_DNS_NAME_OR_IP}:5010/'
 
   api-dapr:
     command:
@@ -49,6 +50,13 @@ services:
       - "./dapr/components/:/components"
       - "./dapr/configuration/:/configuration"
 
+  identity:
+    ports:
+      - '5010:80'
+    environment:
+      DOTNET_ENVIRONMENT: 'Development'
+      ASPNETCORE_URLS: 'http://+:80'
+  
   web:
     ports:
       - '5002:5002'
@@ -61,6 +69,7 @@ services:
       DAPR_METRICS_PORT: 9092
       API_APP_ID: 'api'
       GATEWAY_ADDR: 'http://gateway'
+      Authority: 'http://${EXTERNAL_DNS_NAME_OR_IP}:5010/'
 
   web-dapr:
     command: [
