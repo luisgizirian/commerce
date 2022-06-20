@@ -33,6 +33,12 @@ services:
    build:
     context: ./src/auth-server
     dockerfile: Dockerfile
+
+  functions:
+    image: ${REGISTRY:-cmmrc}/functions:${TAG:-latest}
+    build:
+      context: ./src/functions
+      dockerfile: Dockerfile
   
   react:
     image: ${REGISTRY:-cmmrc}/react:${TAG:-latest}
