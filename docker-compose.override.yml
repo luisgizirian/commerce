@@ -56,6 +56,15 @@ services:
     environment:
       DOTNET_ENVIRONMENT: 'Development'
       ASPNETCORE_URLS: 'http://+:80'
+
+  functions:
+    ports:
+      - '5080:80'
+    environment:
+      DOTNET_ENVIRONMENT: 'Development'
+      ASPNETCORE_URLS: 'http://+:80'
+      AzureWebJobsStorage: 'UseDevelopmentStorage=true'
+      FUNCTIONS_WORKER_RUNTIME: 'dotnet-isolated'
   
   react:
     volumes:
