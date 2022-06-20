@@ -10,7 +10,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.4" />
     <PackageReference Include="MongoDB.Driver" Version="2.15.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
-    <PackageReference Include="Dapr.AspNetCore" Version="1.6.0" />
+    <PackageReference Include="Dapr.AspNetCore" Version="1.7.0" />
   </ItemGroup>
 
 </Project>
