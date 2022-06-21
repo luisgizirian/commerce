@@ -1,7 +1,6 @@
 FROM mcr.microsoft.com/dotnet/sdk:6.0 as build
 WORKDIR /app
 COPY . .
-WORKDIR "/app/http-api"
 RUN dotnet restore
 RUN dotnet publish -o /app/publish
 

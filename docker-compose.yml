@@ -17,8 +17,8 @@ services:
   api:
     image: ${REGISTRY:-cmmrc}/api:${TAG:-latest}
     build:
-      context: ./src
-      dockerfile: http-api/Dockerfile
+      context: ./src/http-api
+      dockerfile: Dockerfile
     depends_on:
       - redis
 
@@ -31,8 +31,8 @@ services:
   identity:
    image: ${REGISTRY:-cmmrc}/identity:${TAG:-latest}
    build:
-    context: ./src
-    dockerfile: auth-server/Dockerfile
+    context: ./src/auth-server
+    dockerfile: Dockerfile
   
   react:
     image: ${REGISTRY:-cmmrc}/react:${TAG:-latest}
@@ -42,8 +42,8 @@ services:
   web:
     image: ${REGISTRY:-cmmrc}/web:${TAG:-latest}
     build:
-      context: ./src
-      dockerfile: web-client/Dockerfile
+      context: ./src/web-client
+      dockerfile: Dockerfile
 
   web-dapr:
     image: 'daprio/daprd:latest'
@@ -65,8 +65,8 @@ services:
   gateway:
     image: ${REGISTRY:-cmmrc}/gateway:${TAG:-latest}
     build:
-      context: .
-      dockerfile: src/gateway/Dockerfile
+      context: ./src/gateway
+      dockerfile: Dockerfile
 
   gateway-dapr:
     image: "daprio/daprd:latest"

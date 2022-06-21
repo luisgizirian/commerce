@@ -1,8 +1,6 @@
 FROM mcr.microsoft.com/dotnet/sdk:6.0 as build
 WORKDIR /app
 COPY . .
-WORKDIR "/app/web-client"
-RUN ls
 RUN dotnet restore
 RUN dotnet publish -o /app/publish
 
