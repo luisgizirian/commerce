@@ -58,8 +58,6 @@ services:
       ASPNETCORE_URLS: 'http://+:80'
 
   functions:
-    ports:
-      - '5080:80'
     environment:
       DOTNET_ENVIRONMENT: 'Development'
       ASPNETCORE_URLS: 'http://+:80'
@@ -112,6 +110,8 @@ services:
       - ENVOY_CATALOG_API_PORT=80
       - ENVOY_ORDERING_API_ADDRESS=ordering-api
       - ENVOY_ORDERING_API_PORT=80
+      - ENVOY_FUNCTIONS_ADDRESS=functions
+      - ENVOY_FUNCTIONS_PORT=80
     ports:
       - "5202:80"
       - "15202:8001"

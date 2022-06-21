@@ -38,6 +38,13 @@ static_resources:
               #     auto_host_rewrite: true
               #     prefix_rewrite: ""
               #     cluster: auth
+              - name: "f"
+                match:
+                  prefix: "/f/"
+                route:
+                  auto_host_rewrite: true
+                  prefix_rewrite: "/api/"
+                  cluster: functions-cl
               - name: "h-short"
                 match:
                   prefix: "/h/"
@@ -131,7 +138,7 @@ static_resources:
     hosts:
     - socket_address:
         address: ${ENVOY_CATALOG_API_ADDRESS}
-        port_value: 80
+        port_value: ${ENVOY_CATALOG_API_PORT}
   - name: ordering-api
     connect_timeout: 0.25s
     type: strict_dns
@@ -139,7 +146,15 @@ static_resources:
     hosts:
     - socket_address:
         address: ${ENVOY_ORDERING_API_ADDRESS}
-        port_value: 80
+        port_value: ${ENVOY_ORDERING_API_PORT}
+  - name: functions-cl
+    connect_timeout: 0.25s
+    type: strict_dns
+    lb_policy: round_robin
+    hosts:
+    - socket_address:
+        address: ${ENVOY_FUNCTIONS_ADDRESS}
+        port_value: ${ENVOY_FUNCTIONS_PORT}
   # - name: auth
   #   connect_timeout: 0.25s
   #   type: strict_dns
