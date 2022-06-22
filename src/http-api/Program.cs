@@ -1,5 +1,6 @@
 using WebApi.Models;
 using WebApi.Services;
+using Dapr;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -41,5 +42,11 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+// Dapr subscription in [Topic] routes orders topic to this route
+app.MapPost("/orders", [Topic("pubsub", "orders")] (string message) => {
+    Console.WriteLine("Subscriber received : " + message);
+    return Results.Ok(message);
+});
 
 app.Run();

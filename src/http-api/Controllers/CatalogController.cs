@@ -1,6 +1,7 @@
 using WebApi.Models;
 using WebApi.Services;
 using Microsoft.AspNetCore.Mvc;
+using Dapr.Client;
 
 namespace WebApi.Controllers;
 
@@ -18,9 +19,18 @@ public class CatalogController : ControllerBase
         _logger = logger;
     }
 
+    // Restore after relocating the DaprClient testing operation.
+    // [HttpGet]
+    // public async Task<List<CatalogItem>> Get(bool includeDisabled = false) =>
+    //     await _catalogService.GetAsync(includeDisabled);
     [HttpGet]
-    public async Task<List<CatalogItem>> Get(bool includeDisabled = false) =>
-        await _catalogService.GetAsync(includeDisabled);
+    public async Task<List<CatalogItem>> Get(bool includeDisabled = false){
+        using var client = new DaprClientBuilder().Build();
+        await client.PublishEventAsync("pubsub", "orders", "{quick-test:true}");
+        _logger.LogInformation("Published data: " + "{quick-test:true}");
+
+        return await _catalogService.GetAsync(includeDisabled);
+    }
 
     [HttpGet("{id:length(24)}")]
     public async Task<ActionResult<CatalogItem>> Get(string id)

@@ -39,6 +39,12 @@ services:
     build:
       context: ./src/functions
       dockerfile: Dockerfile
+
+  functions-dapr:
+    image: 'daprio/daprd:latest'
+    network_mode: 'service:functions'
+    depends_on:
+      - functions
   
   react:
     image: ${REGISTRY:-cmmrc}/react:${TAG:-latest}
@@ -53,17 +59,6 @@ services:
 
   web-dapr:
     image: 'daprio/daprd:latest'
-    command: [
-        './daprd',
-        '-app-id',
-        'web',
-        '-app-port',
-        '5002',
-        '-dapr-http-port',
-        '3502',
-        '-placement-host-address',
-        'placement:50010',
-      ]
     network_mode: 'service:web'
     depends_on:
       - web

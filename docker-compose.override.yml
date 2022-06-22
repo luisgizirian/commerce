@@ -62,8 +62,28 @@ services:
       DOTNET_ENVIRONMENT: 'Development'
       ASPNETCORE_URLS: 'http://+:80'
       AzureWebJobsStorage: 'UseDevelopmentStorage=true'
-      FUNCTIONS_WORKER_RUNTIME: 'dotnet-isolated'
+      FUNCTIONS_WORKER_RUNTIME: 'dotnet'
   
+  functions-dapr:
+    image: 'daprio/daprd:latest'
+    command: [
+        './daprd',
+        '-app-id',
+        'functions',
+        '-app-port',
+        '3001',
+        '-dapr-http-port',
+        '3503',
+        '-placement-host-address',
+        'placement:50010',
+        "-components-path", "/components",
+        "-config", "/configuration/cmmrc-config.yaml",
+        ' func host start'
+      ]
+    volumes:
+      - "./dapr/components/:/components"
+      - "./dapr/configuration/:/configuration"
+
   react:
     volumes:
       - './:/app'
