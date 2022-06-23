@@ -45,19 +45,12 @@ static_resources:
                   auto_host_rewrite: true
                   prefix_rewrite: "/api/"
                   cluster: functions-cl
-              - name: "h-short"
+              - name: "h"
                 match:
                   prefix: "/h/"
                 route:
                   auto_host_rewrite: true
                   prefix_rewrite: "/v1.0/invoke/api/method/"
-                  cluster: dapr
-              - name: "h-long"
-                match:
-                  prefix: "/http-api/"
-                route:
-                  auto_host_rewrite: true
-                  prefix_rewrite: "/v1.0/invoke/http-api/method/"
                   cluster: dapr
               - name: "o-short"
                 match:
