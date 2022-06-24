@@ -1,6 +1,8 @@
 using Terminal.Gui;
 using NStack;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Serilog;
 
 Application.Init();
 var top = Application.Top;
@@ -59,17 +61,26 @@ var passText = new TextField("")
 	Width = Dim.Width(loginText)
 };
 
+var serilogLogger = new LoggerConfiguration()
+           .WriteTo.File("output.txt")
+           .CreateLogger();
+
 var serviceProvider = new ServiceCollection()
+	.AddLogging(builder =>
+		{
+			builder.SetMinimumLevel(LogLevel.Information);
+			builder.AddSerilog(logger: serilogLogger, dispose: true);
+		})
 	.AddSingleton<ICmmrcClient, CmmrcClient>()
 	.BuildServiceProvider();
 
+var logger = serviceProvider
+	.GetService<ILoggerFactory>()
+	.CreateLogger<Program>();
+logger.LogInformation("Logging from Program.cs");
+
 var ok = new Button(3, 14, "Ok");
 ok.Clicked += async () => {
-	// using (var tunnel = new CmmrcClient())
-	// {
-	// 	var result = await tunnel.TestConnection();
-	// 	MessageBox.Query(50, 7, "Result", result, "Ok");
-	// }
 	var tunnel = serviceProvider.GetService<ICmmrcClient>();
 	var result = await tunnel.TestConnection();
 	MessageBox.Query(50, 7, "Result", result, "Ok");
