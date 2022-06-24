@@ -1,5 +1,6 @@
 using Terminal.Gui;
 using NStack;
+using Microsoft.Extensions.DependencyInjection;
 
 Application.Init();
 var top = Application.Top;
@@ -58,13 +59,20 @@ var passText = new TextField("")
 	Width = Dim.Width(loginText)
 };
 
+var serviceProvider = new ServiceCollection()
+	.AddSingleton<ICmmrcClient, CmmrcClient>()
+	.BuildServiceProvider();
+
 var ok = new Button(3, 14, "Ok");
 ok.Clicked += async () => {
-	using (var tunnel = new CmmrcClient())
-	{
-		var result = await tunnel.TestConnection();
-		MessageBox.Query(50, 7, "Result", result, "Ok");
-	}
+	// using (var tunnel = new CmmrcClient())
+	// {
+	// 	var result = await tunnel.TestConnection();
+	// 	MessageBox.Query(50, 7, "Result", result, "Ok");
+	// }
+	var tunnel = serviceProvider.GetService<ICmmrcClient>();
+	var result = await tunnel.TestConnection();
+	MessageBox.Query(50, 7, "Result", result, "Ok");
 };
 
 // Add some controls, 

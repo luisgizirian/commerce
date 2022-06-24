@@ -2,7 +2,12 @@
 using Renci.SshNet;
 using Renci.SshNet.Common;
 
-public class CmmrcClient : IDisposable
+public interface ICmmrcClient
+{
+    Task<string> TestConnection();
+}
+
+public class CmmrcClient : ICmmrcClient, IDisposable
 {
     private readonly SshClient _tunnel;
     private readonly ForwardedPortLocal _port;
@@ -10,7 +15,7 @@ public class CmmrcClient : IDisposable
 
     public CmmrcClient()
     {
-        _tunnel = new SshClient("<replace-me>", "<replace-me>", "<replece-me>");
+        _tunnel = new SshClient("<replace-me>", "<replace-me>", "<replace-me>");
         _tunnel.Connect();
 
         _port = new ForwardedPortLocal("localhost", 10000, "<replace-me>", 5202);
