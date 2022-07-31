@@ -6,6 +6,8 @@
 
 ### Business Management Software for running your daily operations. Easy to deploy, operate, and integrate!
 
+#### Are you an independent developer trying to satisfy the needs for your customers? Then keep reading...
+
 To keep growing your business, having organized and available information is key. What you sell, its availability, your customers, their interactions through time, how operations affect your bottom line, it is all crucial data you want at your fingertips to decide what to do next. 
 
 You will find here a Software piece that takes care of these things. You can also participate (and are encouraged to do so!) in building it by involving in key areas as: development, documentation, testing, overseeing (notifying back), engaging into conversations. You can give as little or as much time you want, as long as you put your thought to it. Become a part of the community!
