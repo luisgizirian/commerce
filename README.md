@@ -6,7 +6,7 @@
 
 ### Business Management Software for running your daily operations. Easy to deploy, operate, and integrate!
 
-**Deploy** it to a single decice. Runs on a Pi plugged in to your customer's network.
+**Deploy** it to a single device. Runs on a Pi plugged in to your customer's network too.
 
 Pick the UI that suits you best. A WebApp or a cojsole based one for those keyboard lovers out there. You can **operate** it as needed. Can't find your poison? BYO and share it with the community.
 
