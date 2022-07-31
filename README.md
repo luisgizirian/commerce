@@ -6,6 +6,12 @@
 
 ### Business Management Software for running your daily operations. Easy to deploy, operate, and integrate!
 
+**Deploy** it to a single decice. Runs on a Pi plugged in to your customer's network.
+
+Pick the UI that suits you best. A WebApp or a cojsole based one for those keyboard lovers out there. You can **operate** it as needed. Can't find your poison? BYO and share it with the community.
+
+[Integrate]...
+
 To keep growing your business, having organized and available information is key. What you sell, its availability, your customers, their interactions through time, how operations affect your bottom line, it is all crucial data you want at your fingertips to decide what to do next. 
 
 You will find here a Software piece that takes care of these things. You can also participate (and are encouraged to do so!) in building it by involving in key areas as: development, documentation, testing, overseeing (notifying back), engaging into conversations. You can give as little or as much time you want, as long as you put your thought to it. Become a part of the community!
