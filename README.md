@@ -6,9 +6,9 @@
 
 ### Business Management Software for running your daily operations. Easy to deploy, operate, and integrate!
 
-**Deploy** it to a single device. Run it on a Pi up to an Enterprise Server.
+**Deploy** it to a Pi up to an Enterprise Server beast.
 
-Pick the UI that suits you best. A WebApp or a cojsole based one for those keyboard lovers out there. You can **operate** it as needed. Can't find your poison? BYO and share it with the community.
+Pick the UI that suits you best. A WebApp or a console based one for those keyboard lovers out there. You can **operate** it as needed. Can't find your poison? BYO and share it with the community.
 
 [Integrate]...
 
