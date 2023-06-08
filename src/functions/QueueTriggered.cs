@@ -1,6 +1,6 @@
 using Microsoft.Extensions.Logging;
-using Dapr.AzureFunctions.Extension;
-using Microsoft.Azure.WebJobs;
+using Microsoft.Azure.Functions.Worker.Extensions.Dapr;
+using Microsoft.Azure.Functions.Worker;
 
 namespace functions
 {
@@ -13,7 +13,7 @@ namespace functions
             _logger = loggerFactory.CreateLogger<DaprQueueTriggered>();
         }
 
-        [FunctionName("DaprQueueTriggered")]
+        [Function("DaprQueueTriggered")]
         public void Run([DaprTopicTrigger("pubsub", Topic = "orders")] string data)
         {
             _logger.LogInformation($"C# Queue trigger function processed: {data}");
