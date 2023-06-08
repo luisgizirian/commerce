@@ -3,8 +3,8 @@
     "build": {
       "dockerfile": "Dockerfile",
       "args": {
-        // Update 'VARIANT' to pick a .NET Core version: 2.1, 3.1, 5.0, 6.0
-        "VARIANT": "6.0",
+        // Update 'VARIANT' to pick a .NET (Core) version: 3.1, 6.0, 7.0
+        "VARIANT": "7.0",
         // Options
         "INSTALL_NODE": "true",
         "NODE_VERSION": "lts/*",
